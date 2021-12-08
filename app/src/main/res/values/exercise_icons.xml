@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="icons">
+        <item>ic_baseline_fitness_center_24</item>
+        <item>ic_baseline_check_24</item>
+        <item>ic_baseline_add_24</item>
+    </string-array>
+
+</resources>

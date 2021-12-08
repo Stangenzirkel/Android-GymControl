@@ -1,5 +1,6 @@
 package stangenzirkel.gymcontrol;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -65,5 +66,13 @@ public class ExerciseDBHelper extends SQLiteOpenHelper {
         }
 
         return exercises;
+    }
+
+    public void addExercise(Exercise exercise) {
+        ContentValues cv = new ContentValues();
+        cv.put("name", exercise.name);
+        cv.put("everyday_target", exercise.target);
+        cv.put("icon", exercise.icon);
+        getWritableDatabase().insert("exercises", null, cv);
     }
 }
