@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" >
+
+    <item
+        android:id="@+id/item_add_exercise"
+        android:title="Add"
+        android:orderInCategory="10"
+        android:icon="@drawable/ic_baseline_add_24"
+        app:showAsAction="ifRoom" />
+</menu>

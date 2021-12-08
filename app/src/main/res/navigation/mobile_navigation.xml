@@ -16,10 +16,10 @@
         android:name="stangenzirkel.gymcontrol.ui.statistic.StatisticFragment"
         android:label="Statistics"
         tools:layout="@layout/fragment_statistic" />
-
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="stangenzirkel.gymcontrol.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_exrecises"
+        android:name="stangenzirkel.gymcontrol.ui.exercises.ExercisesFragment"
+        android:label="My Exercises"
+        tools:layout="@layout/fragment_exercises_list" />
+
 </navigation>
