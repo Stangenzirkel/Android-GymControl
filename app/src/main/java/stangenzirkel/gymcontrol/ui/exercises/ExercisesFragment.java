@@ -1,6 +1,7 @@
 package stangenzirkel.gymcontrol.ui.exercises;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import stangenzirkel.gymcontrol.ExerciseActivity;
 import stangenzirkel.gymcontrol.ExerciseDBHelper;
 import stangenzirkel.gymcontrol.R;
 
@@ -25,7 +27,7 @@ public class ExercisesFragment extends Fragment {
     private int mColumnCount = 1;
     public ExercisesFragment() {
     }
-    private ArrayList<Exercise> exercises;
+    private ArrayList<Exercise> exercises = new ArrayList<>() ;
     public static ExercisesFragment newInstance(int columnCount) {
         ExercisesFragment fragment = new ExercisesFragment();
         Bundle args = new Bundle();
@@ -41,7 +43,7 @@ public class ExercisesFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
-        updateExercises();
+        // updateExercises();
         setHasOptionsMenu(true);
     }
 
@@ -79,7 +81,8 @@ public class ExercisesFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if(id == R.id.item_add_exercise){
-
+            Intent intent = new Intent(getActivity(), ExerciseActivity.class);
+            startActivity(intent);
             return true;
         }
 
