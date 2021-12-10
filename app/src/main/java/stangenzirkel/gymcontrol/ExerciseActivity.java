@@ -34,10 +34,6 @@ public class ExerciseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise);
 
-        if (getIntent().getExtras() != null) {
-
-        }
-
         editTextName = findViewById(R.id.et_name);
         editTextGoal = findViewById(R.id.et_goal);
 
@@ -48,6 +44,14 @@ public class ExerciseActivity extends AppCompatActivity {
                 R.layout.icon_row, icons);
 
         iconSpinner.setAdapter(adapter);
+
+        if (getIntent().getExtras() != null) {
+            id = getIntent().getIntExtra("id", -1);
+            editTextName.setText(getIntent().getStringExtra("name"));
+            editTextGoal.setText(Integer.toString(getIntent().getIntExtra("goal", 0)));
+            String icon = getIntent().getStringExtra("icon");
+            iconSpinner.setSelection(((ArrayAdapter) iconSpinner.getAdapter()).getPosition(icon));
+        }
     }
 
     public class MyCustomAdapter extends ArrayAdapter<String> {
@@ -93,6 +97,10 @@ public class ExerciseActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item_check:
+                if (editTextName.length() == 0 || editTextGoal.length() == 0) {
+                    break;
+                }
+
                 if (id == -1) {
                     Exercise exercise = new Exercise(id,
                             editTextName.getText().toString(),
@@ -100,6 +108,13 @@ public class ExerciseActivity extends AppCompatActivity {
                             iconSpinner.getSelectedItem().toString());
 
                     new ExerciseDBHelper(this).addExercise(exercise);
+                } else {
+                    Exercise exercise = new Exercise(id,
+                            editTextName.getText().toString(),
+                            Integer.parseInt(editTextGoal.getText().toString()),
+                            iconSpinner.getSelectedItem().toString());
+
+                    new ExerciseDBHelper(this).updateExercise(exercise);
                 }
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);

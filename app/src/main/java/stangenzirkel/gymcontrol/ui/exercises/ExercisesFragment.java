@@ -2,6 +2,7 @@ package stangenzirkel.gymcontrol.ui.exercises;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -25,6 +26,7 @@ import stangenzirkel.gymcontrol.R;
 public class ExercisesFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
+    private RecyclerView recyclerView;
     public ExercisesFragment() {
     }
     private ArrayList<Exercise> exercises = new ArrayList<>() ;
@@ -55,21 +57,32 @@ public class ExercisesFragment extends Fragment {
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+            recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
-            updateExercises();
-            recyclerView.setAdapter(new ExercisesRecyclerViewAdapter(exercises));
+            initializeData();
+            initializeAdapter();
+
         }
         return view;
     }
 
-    private void updateExercises() {
+
+    private void initializeData(){
         exercises = new ExerciseDBHelper(getActivity()).getExercises();
+    }
+
+    private void initializeAdapter(){
+        recyclerView.setAdapter(new ExercisesRecyclerViewAdapter(exercises, this));
+    }
+
+    public void update() {
+        initializeData();
+        initializeAdapter();
     }
 
     @Override
@@ -87,5 +100,14 @@ public class ExercisesFragment extends Fragment {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void editExercise(Exercise exercise) {
+        Intent intent = new Intent(getActivity(), ExerciseActivity.class);
+        intent.putExtra("id", exercise.id);
+        intent.putExtra("name", exercise.name);
+        intent.putExtra("goal", exercise.goal);
+        intent.putExtra("icon", exercise.icon);
+        startActivity(intent);
     }
 }
