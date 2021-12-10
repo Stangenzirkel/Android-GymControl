@@ -11,4 +11,4 @@
     android:background="@color/main_background"
     app:layoutManager="LinearLayoutManager"
     tools:context=".ui.exercises.ExercisesFragment"
-    tools:listitem="@layout/fragent_home_list_item" />
+    tools:listitem="@layout/fragment_home_list_item" />

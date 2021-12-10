@@ -49,15 +49,15 @@ public class ExercisesRecyclerViewAdapter extends RecyclerView.Adapter<Exercises
             // setExercise(exercise);
         }
 
-        private void setExercise(Exercise exercise) {
-            this.exercise = exercise;
+        private void setData(Exercise data) {
+            this.exercise = data;
             icon.setImageResource(
                             itemView.getResources().getIdentifier(
-                                    exercise.icon,
+                                    data.icon,
                                     "drawable",
                                     itemView.getContext().getPackageName()));
-            headerTV.setText(exercise.name);
-            bodyTV.setText(Integer.toString(exercise.goal));
+            headerTV.setText(data.name);
+            bodyTV.setText(Integer.toString(data.goal));
         }
 
         @Override
@@ -112,7 +112,7 @@ public class ExercisesRecyclerViewAdapter extends RecyclerView.Adapter<Exercises
 
     @Override
     public void onBindViewHolder(ExerciseViewHolder exerciseViewHolder, int i) {
-        exerciseViewHolder.setExercise(exercises.get(i));
+        exerciseViewHolder.setData(exercises.get(i));
     }
 
     @Override

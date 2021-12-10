@@ -1,35 +1,26 @@
 package stangenzirkel.gymcontrol.ui.home;
 
 import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-
 import java.util.ArrayList;
-import java.util.List;
 
-import stangenzirkel.gymcontrol.ExerciseActivity;
-import stangenzirkel.gymcontrol.ExerciseDBHelper;
 import stangenzirkel.gymcontrol.R;
-import stangenzirkel.gymcontrol.ui.exercises.ExercisesRecyclerViewAdapter;
+import stangenzirkel.gymcontrol.ui.exercises.Exercise;
 
 public class HomeFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
     private RecyclerView recyclerView;
-    private ArrayList<String> strings;
+    private ArrayList<HomeListElement> elements;
 
     public HomeFragment() {
     }
@@ -75,14 +66,12 @@ public class HomeFragment extends Fragment {
     }
 
     private void initializeData(){
-        strings = new ArrayList<>();
-        strings.add("1");
-        strings.add("2");
-        strings.add("3");
-        strings.add("4");
+        elements = new ArrayList<>();
+        elements.add(new HomeListElement(new Exercise(0, "name 2", 50, "ic_baseline_fitness_center_24"), 100, 13));
+        elements.add(new HomeListElement(new Exercise(0, "name 1", 100, "ic_baseline_fitness_center_24"), 100, 58));
     }
 
     private void initializeAdapter(){
-        recyclerView.setAdapter(new HomeRecyclerViewAdapter(strings, this));
+        recyclerView.setAdapter(new HomeRecyclerViewAdapter(elements, this));
     }
 }
