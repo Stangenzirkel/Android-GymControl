@@ -26,7 +26,7 @@ public class ExerciseDBHelper extends SQLiteOpenHelper {
         db.execSQL("create table exercises ("
                 + "id integer primary key autoincrement,"
                 + "name string,"
-                + "everyday_target integer,"
+                + "goal integer,"
                 + "icon string"
                 + ");");
 
@@ -34,6 +34,7 @@ public class ExerciseDBHelper extends SQLiteOpenHelper {
                 + "id integer primary key autoincrement,"
                 + "exercise_id integer,"
                 + "date integer,"
+                + "quantity integer,"
                 + "foreign key ([exercise_id]) references \"exercises\" ([id]) on delete no action on update no action"
                 + ");");
     }
@@ -49,7 +50,7 @@ public class ExerciseDBHelper extends SQLiteOpenHelper {
         if (c.moveToFirst()) {
             int idColIndex = c.getColumnIndex("id");
             int nameColIndex = c.getColumnIndex("name");
-            int targetColIndex = c.getColumnIndex("everyday_target");
+            int targetColIndex = c.getColumnIndex("goal");
             int iconColIndex = c.getColumnIndex("icon");
 
             do {
@@ -76,7 +77,7 @@ public class ExerciseDBHelper extends SQLiteOpenHelper {
         if (c.moveToFirst()) {
             int idColIndex = c.getColumnIndex("id");
             int nameColIndex = c.getColumnIndex("name");
-            int targetColIndex = c.getColumnIndex("everyday_target");
+            int targetColIndex = c.getColumnIndex("goal");
             int iconColIndex = c.getColumnIndex("icon");
 
             exercise = new Exercise(
@@ -95,7 +96,7 @@ public class ExerciseDBHelper extends SQLiteOpenHelper {
         Log.d(tag, "addExercise exercise = " + exercise.toString());
         ContentValues cv = new ContentValues();
         cv.put("name", exercise.name);
-        cv.put("everyday_target", exercise.goal);
+        cv.put("goal", exercise.goal);
         cv.put("icon", exercise.icon);
         getWritableDatabase().insert("exercises", null, cv);
     }
@@ -109,8 +110,10 @@ public class ExerciseDBHelper extends SQLiteOpenHelper {
         Log.d(tag, "deleteExercise exercise = " + exercise.toString());
         ContentValues cv = new ContentValues();
         cv.put("name", exercise.name);
-        cv.put("everyday_target", exercise.goal);
+        cv.put("goal", exercise.goal);
         cv.put("icon", exercise.icon);
         getWritableDatabase().update("exercises", cv, "id = " + exercise.id, null);
     }
+
+
 }
