@@ -1,5 +1,6 @@
 package stangenzirkel.gymcontrol.ui.home;
 
+import android.app.Dialog;
 import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -16,13 +18,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import stangenzirkel.gymcontrol.ExerciseDBHelper;
 import stangenzirkel.gymcontrol.R;
 
 public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerViewAdapter.HomeViewHolder> {
     private final HomeFragment homeFragment;
     String tag = "HomeRecyclerViewAdapterTag";
 
-    public static class HomeViewHolder extends RecyclerView.ViewHolder {
+    public static class HomeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         String tag = "HomeViewHolderTag";
 
         CardView cv;
@@ -51,23 +54,51 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             btnMinus = itemView.findViewById(R.id.btn_minus);
             btnAdd = itemView.findViewById(R.id.btn_add);
             btnPlus = itemView.findViewById(R.id.btn_plus);
+            btnMinus.setOnClickListener(this);
+            btnAdd.setOnClickListener(this);
+            btnPlus.setOnClickListener(this);
             Log.d(tag, itemView.toString());
         }
 
         @RequiresApi(api = Build.VERSION_CODES.N)
         public void setData(ExerciseProgress data) {
             exerciseProgress = data;
-            name.setText(data.exercise.name);
-            percent.setText(data.progress * 100 / data.exercise.goal + "%");
-            goal.setText(Integer.toString(data.exercise.goal));
-            progress.setText(Integer.toString(data.progress));
+            updateView();
+        }
+
+        public void updateView() {
+            name.setText(exerciseProgress.exercise.name);
+            percent.setText(exerciseProgress.progress * 100 / exerciseProgress.exercise.goal + "%");
+            goal.setText(Integer.toString(exerciseProgress.exercise.goal));
+            progress.setText(Integer.toString(exerciseProgress.progress));
             icon.setImageResource(
                     itemView.getResources().getIdentifier(
-                            data.exercise.icon,
+                            exerciseProgress.exercise.icon,
                             "drawable",
                             itemView.getContext().getPackageName()));
-            progressBar.setMax(data.exercise.goal);
-            progressBar.setProgress(data.progress, true);
+            progressBar.setMax(exerciseProgress.exercise.goal);
+            progressBar.setProgress(exerciseProgress.progress);
+        }
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.btn_minus:
+                    ExerciseDBHelper.getInstance().setProgress(exerciseProgress, exerciseProgress.progress - 10);
+                    exerciseProgress.progress -= 10;
+                    break;
+
+                case R.id.btn_plus:
+                    ExerciseDBHelper.getInstance().setProgress(exerciseProgress, exerciseProgress.progress + 10);
+                    exerciseProgress.progress += 10;
+                    break;
+
+                case R.id.btn_add:
+                    ExerciseDBHelper.getInstance().setProgress(exerciseProgress, exerciseProgress.progress + 10);
+                    break;
+            }
+            homeRecyclerViewAdapters.homeFragment.initializeData();
+            updateView();
         }
     }
 

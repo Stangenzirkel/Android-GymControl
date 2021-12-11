@@ -71,12 +71,12 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    private void initializeData() {
+    public void initializeData() {
         int todayDate = (int) (Calendar.getInstance().getTimeInMillis() / 86400000);
         elements = ExerciseDBHelper.getInstance().getAllExerciseProgresses(todayDate, true);
         }
 
-    private void initializeAdapter(){
+    public void initializeAdapter(){
         recyclerView.setAdapter(new HomeRecyclerViewAdapter(elements, this));
     }
 }

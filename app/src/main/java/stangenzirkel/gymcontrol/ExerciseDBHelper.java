@@ -179,9 +179,9 @@ public class ExerciseDBHelper extends SQLiteOpenHelper {
     }
 
     public void setProgress(ExerciseProgress exerciseProgress, int progress) {
-        Log.d(tag, "setProgress exerciseProgress = " + exerciseProgress.toString());
+        Log.d(tag, "setProgress exerciseProgress = " + exerciseProgress.toString() + ", progress = " + progress);
         ContentValues cv = new ContentValues();
         cv.put("quantity", progress);
-        getWritableDatabase().update("exercises", cv, "id = " + exerciseProgress.id, null);
+        getWritableDatabase().update("exercises_history", cv, "id = " + exerciseProgress.id, null);
     }
 }
