@@ -1,6 +1,5 @@
 package stangenzirkel.gymcontrol;
 
-import android.content.ContentValues;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -21,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        ExerciseDBHelper.init(this);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -55,7 +54,5 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
-
-        ExerciseDBHelper.init(this);
     }
 }
