@@ -17,7 +17,6 @@ import stangenzirkel.gymcontrol.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    private ExerciseDBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +56,6 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
-        dbHelper = new ExerciseDBHelper(this);
+        ExerciseDBHelper.init(this);
     }
 }

@@ -1,7 +1,10 @@
 package stangenzirkel.gymcontrol.ui.home;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
+import stangenzirkel.gymcontrol.ExerciseDBHelper;
 import stangenzirkel.gymcontrol.R;
 import stangenzirkel.gymcontrol.ui.exercises.Exercise;
 
@@ -20,7 +26,7 @@ public class HomeFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
     private RecyclerView recyclerView;
-    private ArrayList<HomeListElement> elements;
+    private ArrayList<ExerciseProgress> elements;
 
     public HomeFragment() {
     }
@@ -65,11 +71,10 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    private void initializeData(){
-        elements = new ArrayList<>();
-        elements.add(new HomeListElement(new Exercise(0, "name 2", 50, "ic_baseline_fitness_center_24"), 100, 13));
-        elements.add(new HomeListElement(new Exercise(0, "name 1", 100, "ic_baseline_fitness_center_24"), 100, 58));
-    }
+    private void initializeData() {
+        int todayDate = (int) (Calendar.getInstance().getTimeInMillis() / 86400000);
+        elements = ExerciseDBHelper.getInstance().getAllExerciseProgresses(todayDate, true);
+        }
 
     private void initializeAdapter(){
         recyclerView.setAdapter(new HomeRecyclerViewAdapter(elements, this));

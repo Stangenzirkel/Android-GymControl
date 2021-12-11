@@ -36,7 +36,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         Button btnAdd;
         Button btnPlus;
         HomeRecyclerViewAdapter homeRecyclerViewAdapters;
-        HomeListElement homeListElement;
+        ExerciseProgress exerciseProgress;
 
         HomeViewHolder(View itemView, HomeRecyclerViewAdapter homeRecyclerViewAdapters) {
             super(itemView);
@@ -55,10 +55,10 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         }
 
         @RequiresApi(api = Build.VERSION_CODES.N)
-        public void setData(HomeListElement data) {
-            homeListElement = data;
+        public void setData(ExerciseProgress data) {
+            exerciseProgress = data;
             name.setText(data.exercise.name);
-            percent.setText(Float.toString(data.getPercent()));
+            percent.setText(data.progress * 100 / data.exercise.goal + "%");
             goal.setText(Integer.toString(data.exercise.goal));
             progress.setText(Integer.toString(data.progress));
             icon.setImageResource(
@@ -71,9 +71,9 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         }
     }
 
-    List<HomeListElement> elements;
+    List<ExerciseProgress> elements;
 
-    HomeRecyclerViewAdapter(List<HomeListElement> elements, HomeFragment homeFragment){
+    HomeRecyclerViewAdapter(List<ExerciseProgress> elements, HomeFragment homeFragment){
         this.elements = elements;
         this.homeFragment = homeFragment;
     }

@@ -107,14 +107,14 @@ public class ExerciseActivity extends AppCompatActivity {
                             Integer.parseInt(editTextGoal.getText().toString()),
                             iconSpinner.getSelectedItem().toString());
 
-                    new ExerciseDBHelper(this).addExercise(exercise);
+                    ExerciseDBHelper.getInstance().addExercise(exercise);
                 } else {
                     Exercise exercise = new Exercise(id,
                             editTextName.getText().toString(),
                             Integer.parseInt(editTextGoal.getText().toString()),
                             iconSpinner.getSelectedItem().toString());
 
-                    new ExerciseDBHelper(this).updateExercise(exercise);
+                    ExerciseDBHelper.getInstance().updateExercise(exercise);
                 }
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);

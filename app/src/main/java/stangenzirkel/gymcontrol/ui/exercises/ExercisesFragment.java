@@ -29,7 +29,7 @@ public class ExercisesFragment extends Fragment {
     private RecyclerView recyclerView;
     public ExercisesFragment() {
     }
-    private ArrayList<Exercise> exercises = new ArrayList<>() ;
+    private ArrayList<Exercise> exercises = new ArrayList<>();
     public static ExercisesFragment newInstance(int columnCount) {
         ExercisesFragment fragment = new ExercisesFragment();
         Bundle args = new Bundle();
@@ -73,7 +73,7 @@ public class ExercisesFragment extends Fragment {
 
 
     private void initializeData(){
-        exercises = new ExerciseDBHelper(getActivity()).getExercises();
+        exercises = ExerciseDBHelper.getInstance().getExercises();
     }
 
     private void initializeAdapter(){
@@ -93,7 +93,7 @@ public class ExercisesFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.item_add_exercise){
+        if(id == R.id.item_add_exercise) {
             Intent intent = new Intent(getActivity(), ExerciseActivity.class);
             startActivity(intent);
             return true;
