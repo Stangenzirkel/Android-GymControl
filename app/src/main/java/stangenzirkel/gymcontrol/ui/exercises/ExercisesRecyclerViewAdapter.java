@@ -65,7 +65,7 @@ public class ExercisesRecyclerViewAdapter extends RecyclerView.Adapter<Exercises
             Log.d(tag, "onMenuItemClick exercise = " + exercise.toString());
             switch (item.getItemId()) {
                 case (DELETE):
-                    new ExerciseDBHelper(headerTV.getContext()).deleteExercise(exercise.id);
+                    ExerciseDBHelper.getInstance().deleteExercise(exercise.id);
                     exercisesRecyclerViewAdapter.exercisesFragment.update();
                     break;
                 case (EDIT):
