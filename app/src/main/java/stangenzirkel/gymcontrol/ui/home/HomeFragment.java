@@ -1,10 +1,7 @@
 package stangenzirkel.gymcontrol.ui.home;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import stangenzirkel.gymcontrol.ExerciseDBHelper;
+import stangenzirkel.gymcontrol.ExerciseProgress;
 import stangenzirkel.gymcontrol.R;
-import stangenzirkel.gymcontrol.ui.exercises.Exercise;
 
 public class HomeFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";

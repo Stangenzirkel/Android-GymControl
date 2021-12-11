@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import stangenzirkel.gymcontrol.Exercise;
 import stangenzirkel.gymcontrol.ExerciseDBHelper;
 import stangenzirkel.gymcontrol.R;
 

@@ -9,11 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-
-import stangenzirkel.gymcontrol.ui.exercises.Exercise;
-import stangenzirkel.gymcontrol.ui.home.ExerciseProgress;
 
 public class ExerciseDBHelper extends SQLiteOpenHelper {
     String tag = "ExerciseDBHelper";

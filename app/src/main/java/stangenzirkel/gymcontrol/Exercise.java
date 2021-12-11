@@ -1,4 +1,4 @@
-package stangenzirkel.gymcontrol.ui.exercises;
+package stangenzirkel.gymcontrol;
 
 public class Exercise {
     public int id;

@@ -1,6 +1,4 @@
-package stangenzirkel.gymcontrol.ui.home;
-
-import stangenzirkel.gymcontrol.ui.exercises.Exercise;
+package stangenzirkel.gymcontrol;
 
 public class ExerciseProgress {
     public Exercise exercise;

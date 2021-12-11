@@ -1,6 +1,5 @@
 package stangenzirkel.gymcontrol.ui.home;
 
-import android.app.Dialog;
 import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.NumberPicker;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -19,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import stangenzirkel.gymcontrol.ExerciseDBHelper;
+import stangenzirkel.gymcontrol.ExerciseProgress;
 import stangenzirkel.gymcontrol.R;
 
 public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerViewAdapter.HomeViewHolder> {
