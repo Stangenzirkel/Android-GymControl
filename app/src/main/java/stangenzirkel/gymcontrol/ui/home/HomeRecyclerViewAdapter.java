@@ -1,12 +1,16 @@
 package stangenzirkel.gymcontrol.ui.home;
 
+import android.app.AlertDialog;
 import android.os.Build;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -19,6 +23,7 @@ import java.util.List;
 import stangenzirkel.gymcontrol.ExerciseDBHelper;
 import stangenzirkel.gymcontrol.ExerciseProgress;
 import stangenzirkel.gymcontrol.R;
+import stangenzirkel.gymcontrol.ui.exercises.ExercisesRecyclerViewAdapter;
 
 public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerViewAdapter.HomeViewHolder> {
     private final HomeFragment homeFragment;
@@ -94,6 +99,24 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
 
                 case R.id.btn_add:
                     ExerciseDBHelper.getInstance().setProgress(exerciseProgress, exerciseProgress.progress + 10);
+                    NumberPicker picker = new NumberPicker(homeRecyclerViewAdapters.homeFragment.getContext());
+                    picker.setMinValue(1);
+                    picker.setMaxValue(100);
+
+                    FrameLayout layout = new FrameLayout(homeRecyclerViewAdapters.homeFragment.getContext());
+                    layout.addView(picker, new FrameLayout.LayoutParams(
+                            FrameLayout.LayoutParams.WRAP_CONTENT,
+                            FrameLayout.LayoutParams.WRAP_CONTENT,
+                            Gravity.CENTER));
+
+                    new AlertDialog.Builder(homeRecyclerViewAdapters.homeFragment.getContext())
+                            .setView(layout)
+                            .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
+                                ExerciseDBHelper.getInstance().setProgress(exerciseProgress, exerciseProgress.progress + picker.getValue());
+                                exerciseProgress.progress += picker.getValue();
+                            })
+                            .setNegativeButton(android.R.string.cancel, null)
+                            .show();
                     break;
             }
             homeRecyclerViewAdapters.homeFragment.initializeData();
